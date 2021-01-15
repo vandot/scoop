@@ -1,24 +1,24 @@
 {
-    "version": "0.1.15",
+    "version": "0.1.16",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.15/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.16/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "a8d21c9b1dbd42092b04daff77ce90f770dad80308adbaa017450ee3b991ea4f"
+            "hash": "e690901bf8c1d721879bd367337e4b54ff02261616fe5233cd7573cd9dffad41"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.15/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.16/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "1282e504f1908671f0c91d30f366b93d6a8361ae1b913551f0f675f3c8943e49"
+            "hash": "4a88e2b7d5e0c23774a364e66a3e1596e582186c4c0e61b0055fe46b86a2d416"
         }
     },
     "homepage": "https://github.com/vandot/bee",
-    "license": "MIT",
-    "description": "Testing bee scoop.",
+    "license": "BSD-3-Clause",
+    "description": "Swarm client implemented in Go.",
     "persist": [
         "data",
         "packaging/scoop/bee.yaml"
@@ -30,9 +30,9 @@
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './data',\"$persist_dir\\data\" | Set-Content -Path $persist_dir\\bee.yaml",
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './password',\"$persist_dir\\password\" | Set-Content -Path $persist_dir\\bee.yaml",
         "if(!(Test-Path $persist_dir\\password)){[System.Web.Security.Membership]::GeneratePassword(32,5) | Set-Content -Path $persist_dir\\password}",
-        "if(Test-Path C:\\ProgramData\\scoop\\shims\\bee.exe){sc.exe create SwarmBeeSvc binPath= \"C:\\ProgramData\\scoop\\shims\\bee.exe start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"}",
-        "if(Test-Path C:\\ProgramData\\scoop\\shims\\bee.exe){sc.exe description SwarmBeeSvc \"Swarm client implemented in Go.\"}",
-        "if(Test-Path C:\\ProgramData\\scoop\\shims\\bee.exe){$ETH_ADDRESS = (((C:\\ProgramData\\scoop\\shims\\bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')} else {$ETH_ADDRESS = (((bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')}; Write-Host \"Please make sure there is sufficient eth and bzz available on $ETH_ADDRESS address.\nYou can get both goerli eth and goerli bzz from https://faucet.ethswarm.org?address=$ETH_ADDRESS\"",
-        "if(Test-Path C:\\ProgramData\\scoop\\shims\\bee.exe){Write-Host 'Start Bee service with sc.exe start SwarmBeeSvc'}"
+        "if(!(sc.exe query SwarmBeeSvc)){sc.exe create SwarmBeeSvc binPath= \"$dir\\current\\bee.exe start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"}",
+        "if(!(sc.exe query SwarmBeeSvc)){sc.exe description SwarmBeeSvc \"Swarm client implemented in Go.\"}",
+        "$ETH_ADDRESS = ((($dir\\current\\bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')",
+        "Write-Host 'Start Bee service with [sudo] sc.exe start SwarmBeeSvc'"
     ]
 }
