@@ -1,19 +1,19 @@
 {
-    "version": "0.1.6",
+    "version": "0.1.7",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.6/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.7/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "3ad4208b83c5c8e157c097cabaffca894bba419e679127710b46508dbf75dff1"
+            "hash": "7662cdc7d276b155856ef963ef3afafafed91a086089b44cdf4a61ea7f37d70e"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.6/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.7/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "10007062061abc024480847e0bb6c3e877b264c4207d852c15bedb088dbb3ecc"
+            "hash": "1c2dbac115f87b84dc11ea2193cdb815b7824dcf753c396d213a9c3b87427ecd"
         }
     },
     "homepage": "https://github.com/vandot/bee",
@@ -28,7 +28,7 @@
     ],
     "post_install": [
         "Write-Host 'Running postinstall command'",
-        "New-Item -ItemType SymbolicLink -Path \"$persist_dir\\packaging\\scoop\\bee.yaml\" -Target \"$persist_dir\\bee.yaml\"",
+        "New-Item -ItemType SymbolicLink -Path \"$persist_dir\\bee.yaml\" -Target \"$persist_dir\\packaging\\scoop\\bee.yaml\"",
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './bee.yaml',\"$persist_dir\\bee.yaml\" | Set-Content -Path $persist_dir\\bee.yaml",
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './data',\"$persist_dir\\data\" | Set-Content -Path $persist_dir\\bee.yaml",
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './password',\"$persist_dir\\password\" | Set-Content -Path $persist_dir\\bee.yaml",
