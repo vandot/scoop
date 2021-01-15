@@ -1,19 +1,19 @@
 {
-    "version": "0.1.16",
+    "version": "0.1.17",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.16/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.17/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "e690901bf8c1d721879bd367337e4b54ff02261616fe5233cd7573cd9dffad41"
+            "hash": "e178999eb703aa97da031aa203ee033a6bc70dd1d731194d3169f412d068f4cb"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.16/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.17/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "4a88e2b7d5e0c23774a364e66a3e1596e582186c4c0e61b0055fe46b86a2d416"
+            "hash": "f6cee6c98ebf2b0dd7c80708f94eefe8732e9a2779fd52f367f5a5b17b000357"
         }
     },
     "homepage": "https://github.com/vandot/bee",
@@ -30,9 +30,9 @@
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './data',\"$persist_dir\\data\" | Set-Content -Path $persist_dir\\bee.yaml",
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './password',\"$persist_dir\\password\" | Set-Content -Path $persist_dir\\bee.yaml",
         "if(!(Test-Path $persist_dir\\password)){[System.Web.Security.Membership]::GeneratePassword(32,5) | Set-Content -Path $persist_dir\\password}",
-        "if(!(sc.exe query SwarmBeeSvc)){sc.exe create SwarmBeeSvc binPath= \"$dir\\current\\bee.exe start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"}",
+        "if(!(sc.exe query SwarmBeeSvc)){sc.exe create SwarmBeeSvc binPath= \"$dir\\bee.exe start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"}",
         "if(!(sc.exe query SwarmBeeSvc)){sc.exe description SwarmBeeSvc \"Swarm client implemented in Go.\"}",
-        "$ETH_ADDRESS = ((($dir\\current\\bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')",
+        "$ETH_ADDRESS = ((($dir\\bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')",
         "Write-Host 'Start Bee service with [sudo] sc.exe start SwarmBeeSvc'"
     ]
 }
