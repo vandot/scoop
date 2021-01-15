@@ -1,19 +1,19 @@
 {
-    "version": "0.1.4",
+    "version": "0.1.5",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.4/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.5/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "57be1497bc5bef19341f9e02e120be2c9691a913fc4c20030f2f2d342d8cc7ee"
+            "hash": "4d2cb215024ce8c86cbed395c17d64ecfc0156692748250a35d846c76b08c8ca"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.4/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.5/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "dafb930c4544002a0c0eee63a0eb8cdf60c46b91b7d0b1999431423feaf573e5"
+            "hash": "884bbd86082dc665ba025c256c3af9fecb1cd3b1b8517a7936b605ec96f306fc"
         }
     },
     "homepage": "https://github.com/vandot/bee",
@@ -21,7 +21,7 @@
     "description": "Testing bee scoop.",
     "persist": [
         "data",
-        "packaging/scoop/bee.yaml"
+        "bee.yaml"
     ],
     "pre_install": [
         "Write-Host 'Running preinstall command'"
