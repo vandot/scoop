@@ -1,19 +1,19 @@
 {
-    "version": "0.1.18",
+    "version": "0.1.19",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.18/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.19/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "83ecaace3751f8cb634c56c16dcfe2e2ad7064a6d244cde730471a51f79959b3"
+            "hash": "5a2a757de03fb59333f989751930855f604d9114e48eed7c9d946de39b5e8727"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.18/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.19/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "84c02b98ff6dfbd7c083c7d54191c7680b9b8046d48d56e814cb1f6e453fd5a6"
+            "hash": "7d053d3b68efd2998fff1697b4fd05781cad2f5360f34b33e4dcab39fc6871fe"
         }
     },
     "homepage": "https://github.com/vandot/bee",
@@ -32,7 +32,7 @@
         "if(!(Test-Path $persist_dir\\password)){[System.Web.Security.Membership]::GeneratePassword(32,5) | Set-Content -Path $persist_dir\\password}",
         "if(!(sc.exe query SwarmBeeSvc)){sc.exe create SwarmBeeSvc binPath= \"$dir\\bee.exe start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"}",
         "if(!(sc.exe query SwarmBeeSvc)){sc.exe description SwarmBeeSvc \"Swarm client implemented in Go.\"}",
-        "$ETH_ADDRESS = ((( $dir\\bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')",
+        "if(Test-Path C:\\ProgramData\\scoop\\shims\\bee.exe){$ETH_ADDRESS = (((C:\\ProgramData\\scoop\\shims\\bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')} else {$ETH_ADDRESS = (((bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')}; Write-Host \"Please make sure there is sufficient eth and bzz available on $ETH_ADDRESS address.\nYou can get both goerli eth and goerli bzz from https://faucet.ethswarm.org?address=$ETH_ADDRESS\"",
         "Write-Host 'Start Bee service with [sudo] sc.exe start SwarmBeeSvc'"
     ]
 }
