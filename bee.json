@@ -1,19 +1,19 @@
 {
-    "version": "0.1.12",
+    "version": "0.1.13",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.12/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.13/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "991ee436dc57c0f5f7e21dacfb67d54364394be6360c50bc699c0581b717a1fc"
+            "hash": "9d380768acb508a9c8788d339614510b244060e61a64f6731c495d9e69a6e24f"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.12/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.13/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "a61f6b4abed69565fbcbfa902170df0de77d3eebfca717836e90b853af271fa7"
+            "hash": "71f6345c29697cf52e6fe4f4feca40cb24ddb003b2037407dbcefbb1ce24c28e"
         }
     },
     "homepage": "https://github.com/vandot/bee",
@@ -23,9 +23,6 @@
         "data",
         "packaging/scoop/bee.yaml"
     ],
-    "pre_install": [
-        "Write-Host 'Running preinstall command'"
-    ],
     "post_install": [
         "Write-Host 'Running postinstall command'",
         "if(!(Test-Path $persist_dir\\bee.yaml)){New-Item -ItemType SymbolicLink -Path \"$persist_dir\\bee.yaml\" -Target \"$persist_dir\\packaging\\scoop\\bee.yaml\" | Out-Null}",
@@ -33,7 +30,7 @@
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './data',\"$persist_dir\\data\" | Set-Content -Path $persist_dir\\bee.yaml",
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './password',\"$persist_dir\\password\" | Set-Content -Path $persist_dir\\bee.yaml",
         "if(!(Test-Path $persist_dir\\password)){[System.Web.Security.Membership]::GeneratePassword(32,5) | Set-Content -Path $persist_dir\\password}",
-        "$BEE_EXE = (Get-Command bee.exe | Format-Table -HideTableHeaders Path); sc.exe create SwarmBeeSvc binPath= \"$BEE_EXE start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"",
+        "$BEE_EXE = (Get-Command bee.exe | Format-Table -HideTableHeaders Path | Out-String); sc.exe create SwarmBeeSvc binPath= \"$BEE_EXE start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"",
         "sc.exe description SwarmBeeSvc \"Swarm client implemented in Go.\"",
         "$ETH_ADDRESS = (((bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"'); Write-Host \"Please make sure there is sufficient eth and bzz available on $ETH_ADDRESS address.\nYou can get both goerli eth and goerli bzz from https://faucet.ethswarm.org?address=$ETH_ADDRESS\"",
         "Write-Host 'Start Bee service with sc.exe start SwarmBeeSvc'"
