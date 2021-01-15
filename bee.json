@@ -1,19 +1,19 @@
 {
-    "version": "0.1.7",
+    "version": "0.1.9",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.7/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.9/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "7662cdc7d276b155856ef963ef3afafafed91a086089b44cdf4a61ea7f37d70e"
+            "hash": "651aaf1ae5c171d3e18cae16fbd2e2a4e4d37f5e5cb8dd884fe628a0142757c8"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.1.7/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.1.9/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "1c2dbac115f87b84dc11ea2193cdb815b7824dcf753c396d213a9c3b87427ecd"
+            "hash": "3d22417716a276c2043f8a98f9a17834a29ffaf9fe03895d8ab4f4d60818f1e8"
         }
     },
     "homepage": "https://github.com/vandot/bee",
@@ -32,6 +32,9 @@
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './bee.yaml',\"$persist_dir\\bee.yaml\" | Set-Content -Path $persist_dir\\bee.yaml",
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './data',\"$persist_dir\\data\" | Set-Content -Path $persist_dir\\bee.yaml",
         "(Get-Content -path $persist_dir\\bee.yaml -Raw) -replace './password',\"$persist_dir\\password\" | Set-Content -Path $persist_dir\\bee.yaml",
-        "if(!(Test-Path $persist_dir\\password)){[System.Web.Security.Membership]::GeneratePassword(32,5) | Set-Content -Path $persist_dir\\password}"
+        "if(!(Test-Path $persist_dir\\password)){[System.Web.Security.Membership]::GeneratePassword(32,5) | Set-Content -Path $persist_dir\\password}",
+        "sc create SwarmBeeSvc binPath= \"bee.exe start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"",
+        "sc description SwarmBeeSvc \"Swarm client implemented in Go.\"",
+        "$ETH_ADDRESS = (((bee init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"'); Write-Host \"Please make sure there is sufficient eth and bzz available on $ETH_ADDRESS address.\nYou can get both goerli eth and goerli bzz from https://faucet.ethswarm.org?address=$ETH_ADDRESS\""
     ]
 }
