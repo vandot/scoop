@@ -1,19 +1,19 @@
 {
-    "version": "0.2.3",
+    "version": "0.2.4",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.2.3/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.2.4/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "c9d8e9f4867ae497be5c892460fb9e25b660fbd5ad2ab3389380a31f711d2432"
+            "hash": "2b3e0904aa5da357af86be7bd13c1ac89e8debd3b1843bbca088ab689b7c8725"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.2.3/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.2.4/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "fa81a93153922c1583acd164d4cc815c7e4f037520afb20c87e4d5c88787b3f7"
+            "hash": "5cc273c19244152c00cd06544887233e5654a4ddd0553834c15003d7614e85d8"
         }
     },
     "homepage": "https://github.com/vandot/bee",
