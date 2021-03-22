@@ -1,19 +1,19 @@
 {
-    "version": "0.6.3",
+    "version": "0.6.4",
     "architecture": {
         "32bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.6.3/bee-windows-386.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.6.4/bee-windows-386.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "466df3916e74ba6552f3ee50307e9de5a3886bb9941dd9200e75f2d6879c2286"
+            "hash": "362deb5e5a6c23c698569607cc71a27dfad4dfeeb36b2145d57d89f1823e4f13"
         },
         "64bit": {
-            "url": "https://github.com/vandot/bee/releases/download/v0.6.3/bee-windows-amd64.zip",
+            "url": "https://github.com/vandot/bee/releases/download/v0.6.4/bee-windows-amd64.zip",
             "bin": [
                 "bee.exe"
             ],
-            "hash": "ebb56d7ac20aebc6528cd161aed6551edb58a73d5e4e2673e031982913607523"
+            "hash": "ada3b6efdfdf162e054873ffe17ab937f40650cb0ed219b58d73ef491c47fb40"
         }
     },
     "homepage": "https://github.com/ethersphere/bee",
@@ -32,7 +32,7 @@
         "if(!(Test-Path $persist_dir\\password)){[System.Web.Security.Membership]::GeneratePassword(32,5) | Set-Content -Path $persist_dir\\password}",
         "if(sc.exe query SwarmBeeSvc | Select-String FAILED){sc.exe create SwarmBeeSvc binPath= \"$dir\\bee.exe start --config=$persist_dir\\bee.yaml\" type= share start= auto displayName= \"Bee\"; sc.exe description SwarmBeeSvc \"Swarm client implemented in Go.\"}",
         "if($global){$ETH_ADDRESS = (((C:\\ProgramData\\scoop\\shims\\bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')} else {$ETH_ADDRESS = (((bee.exe init --config=$persist_dir\\bee.yaml | Select-String ethereum) -split ' ‘)[-1]).Trim('\"')}; Write-Host \"Please make sure there is sufficient eth and bzz available on $ETH_ADDRESS address.\nYou can get both goerli eth and goerli bzz from https://bzz.ethswarm.org/?transaction=buy\u0026amount=10\u0026slippage=30\u0026receiver=0x$ETH_ADDRESS\"",
-        "Write-Host 'After the initial fund deploy Bee checkbook with [sudo] $dir\\bee.exe deploy --config=$persist_dir\\bee.yaml'",
+        "Write-Host \"After the initial fund deploy Bee checkbook with [sudo] $dir\\bee.exe deploy --config=$persist_dir\\bee.yaml\"",
         "Write-Host 'Start Bee service with [sudo] sc.exe start SwarmBeeSvc'"
     ]
 }
